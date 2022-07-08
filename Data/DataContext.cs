@@ -10,5 +10,6 @@ namespace Disney.Data
 
         public DbSet<Character> Characters { get; set; }
         public DbSet<MovieSerie> MovieSeries { get; set; }
+        public DbSet<Genre> Genres { get; set; }
     }
 }
