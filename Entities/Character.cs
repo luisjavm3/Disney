@@ -6,7 +6,7 @@ namespace Disney.Entities
     {
         public int Id { get; set; }
 
-        [Required]
+        // [Required]
         public string ImagePath { get; set; }
 
         [Required]
@@ -16,7 +16,7 @@ namespace Disney.Entities
         public int Age { get; set; }
 
         [Required]
-        public string Weight { get; set; }
+        public int Weight { get; set; }
 
         [Required]
         public string History { get; set; }

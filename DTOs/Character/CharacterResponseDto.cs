@@ -8,7 +8,7 @@ namespace Disney.DTOs.Character
 
         public int Age { get; set; }
 
-        public string Weight { get; set; }
+        public int Weight { get; set; }
 
         public string History { get; set; }
     }
