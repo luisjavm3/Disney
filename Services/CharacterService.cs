@@ -59,7 +59,10 @@ namespace Disney.Services
                 catch (Exception ex)
                 {
                     await transaction.RollbackAsync();
-                    File.Delete(imagePath);
+
+                    if (!imagePath.Equals(string.Empty))
+                        File.Delete(path: imagePath);
+
                     throw new AppException("Something went wrong when adding new character: " + ex.StackTrace);
                 }
             }
