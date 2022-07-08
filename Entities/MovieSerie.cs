@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Disney.Entities
 {
-    public class Character : IEntity
+    public class MovieSerie : IEntity
     {
         public int Id { get; set; }
 
@@ -10,14 +10,14 @@ namespace Disney.Entities
         public string ImagePath { get; set; }
 
         [Required]
-        public int Age { get; set; }
+        public string Title { get; set; }
 
         [Required]
-        public string Weight { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         [Required]
-        public string History { get; set; }
+        public int Rate { get; set; }
 
-        public IList<MovieSerie> MovieSeries { get; set; }
+        public IList<Character> Characters { get; set; }
     }
 }
