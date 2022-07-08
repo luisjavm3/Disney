@@ -21,5 +21,11 @@ namespace Disney.Controllers
             CharacterResponseDto response = await _characterService.AddOne(characterCreate, image);
             return Ok(response);
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IList<CharacterListItemDto>>> GetAllCharacters()
+        {
+            return Ok(await _characterService.GetAll());
+        }
     }
 }

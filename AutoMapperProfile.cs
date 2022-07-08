@@ -10,6 +10,7 @@ namespace Disney
         {
             CreateMap<Character, CharacterResponseDto>();
             CreateMap<CharacterCreateDto, Character>();
+            CreateMap<Character, CharacterListItemDto>();
         }
     }
 }

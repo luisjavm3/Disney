@@ -4,6 +4,7 @@ using Disney.DTOs.Character;
 using Disney.Entities;
 using Disney.Exceptions;
 using Disney.Settings;
+using Microsoft.EntityFrameworkCore;
 
 namespace Disney.Services
 {
@@ -56,7 +57,7 @@ namespace Disney.Services
 
                     await transaction.CommitAsync();
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
                     await transaction.RollbackAsync();
 
@@ -70,6 +71,12 @@ namespace Disney.Services
             return _mapper.Map<CharacterResponseDto>(character);
         }
 
-        // public async Task<IList<>>
+        public async Task<IList<CharacterListItemDto>> GetAll()
+        {
+            var characters = await _context.Characters.ToListAsync();
+            var result = characters.Select(c => _mapper.Map<CharacterListItemDto>(c)).ToList();
+
+            return result;
+        }
     }
 }

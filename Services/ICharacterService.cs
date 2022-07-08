@@ -5,5 +5,6 @@ namespace Disney.Services
     public interface ICharacterService
     {
         Task<CharacterResponseDto> AddOne(CharacterCreateDto charaterCreate, IFormFile imageFile);
+        Task<IList<CharacterListItemDto>> GetAll();
     }
 }
