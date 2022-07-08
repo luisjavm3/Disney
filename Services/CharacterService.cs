@@ -43,7 +43,7 @@ namespace Disney.Services
 
                     await _context.SaveChangesAsync();
 
-                    imagePath = $"{_imagePaths.Characters}/{character.Id}.{Path.GetExtension(imageFile.FileName)}";
+                    imagePath = $"{_imagePaths.Characters}/{character.Id}{Path.GetExtension(imageFile.FileName)}";
 
                     using (var stream = System.IO.File.Create(path: imagePath))
                     {
