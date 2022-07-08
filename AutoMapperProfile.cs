@@ -9,6 +9,7 @@ namespace Disney
         public AutoMapperProfile()
         {
             CreateMap<Character, CharacterResponseDto>();
+            CreateMap<CharacterCreateDto, Character>();
         }
     }
 }
