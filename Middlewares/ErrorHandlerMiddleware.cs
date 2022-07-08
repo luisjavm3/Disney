@@ -46,7 +46,7 @@ namespace Disney.Middlewares
                         break;
                 }
 
-                var result = JsonSerializer.Serialize(new { message = ex?.Message, success = false });
+                var result = JsonSerializer.Serialize(new { message = ex?.Message, trace = ex?.StackTrace, success = false });
                 await response.WriteAsync(result);
             }
         }

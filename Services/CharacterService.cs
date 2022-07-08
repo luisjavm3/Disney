@@ -63,11 +63,13 @@ namespace Disney.Services
                     if (!imagePath.Equals(string.Empty))
                         File.Delete(path: imagePath);
 
-                    throw new AppException("Something went wrong when adding new character: " + ex.StackTrace);
+                    throw new AppException("Something went wrong when adding new character.");
                 }
             }
 
             return _mapper.Map<CharacterResponseDto>(character);
         }
+
+        // public async Task<IList<>>
     }
 }
