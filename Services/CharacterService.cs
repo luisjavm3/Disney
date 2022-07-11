@@ -1,9 +1,11 @@
+using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using Disney.Data;
 using Disney.DTOs.Character;
 using Disney.Entities;
 using Disney.Exceptions;
 using Disney.Settings;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Disney.Services
@@ -92,9 +94,29 @@ namespace Disney.Services
             File.Delete(existingCharacter.ImagePath);
         }
 
-        public async Task<CharacterUpdatedDto> UpdateCharacter()
+        [HttpPut("{id}")]
+        public async Task<CharacterUpdateResponseDto> UpdateCharacter([FromForm] CharacterUpdateDto characterUpdate, IFormFile imageFile, int id)
         {
-            throw new NotImplementedException();
+            var existingCharacter = await _context.Characters.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (existingCharacter == null)
+                throw new ObjectNotFoundException("Character not found.");
+
+            File.Delete(existingCharacter.ImagePath);
+
+            using (var stream = System.IO.File.Create(existingCharacter.ImagePath))
+            {
+                await imageFile.CopyToAsync(stream);
+            }
+
+            existingCharacter.Name = characterUpdate.Name;
+            existingCharacter.Age = characterUpdate.Age;
+            existingCharacter.Weight = characterUpdate.Weight;
+            existingCharacter.History = characterUpdate.History;
+            await _context.SaveChangesAsync();
+
+            var result = _mapper.Map<CharacterUpdateResponseDto>(existingCharacter);
+            return result;
         }
     }
 }

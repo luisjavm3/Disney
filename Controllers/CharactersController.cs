@@ -1,4 +1,6 @@
+using System.ComponentModel.DataAnnotations;
 using Disney.DTOs.Character;
+using Disney.Exceptions;
 using Disney.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +35,16 @@ namespace Disney.Controllers
         {
             await _characterService.DeleteCharacter(id);
             return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<CharacterUpdateResponseDto>> UpdateCharacter([FromForm] CharacterUpdateDto characterUpdate, [Required] IFormFile image, int id)
+        {
+            if (image == null)
+                throw new AppException("No image provided.");
+
+            var result = await _characterService.UpdateCharacter(characterUpdate, image, id);
+            return Ok(result);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Disney.DTOs.Character;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Disney.Services
 {
@@ -7,5 +8,6 @@ namespace Disney.Services
         Task<CharacterResponseDto> AddCharacter(CharacterCreateDto charaterCreate, IFormFile imageFile);
         Task<IList<CharacterListItemDto>> GetAll();
         Task DeleteCharacter(int id);
+        Task<CharacterUpdateResponseDto> UpdateCharacter(CharacterUpdateDto characterUpdate, IFormFile imageFile, int id);
     }
 }
