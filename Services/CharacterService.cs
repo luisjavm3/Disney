@@ -24,7 +24,7 @@ namespace Disney.Services
             _imagePaths = _configuration.GetSection(nameof(ImagePaths)).Get<ImagePaths>();
         }
 
-        public async Task<CharacterResponseDto> AddOne(CharacterCreateDto charaterCreate, IFormFile imageFile)
+        public async Task<CharacterResponseDto> AddCharacter(CharacterCreateDto charaterCreate, IFormFile imageFile)
         {
             if (imageFile.Length <= 0)
                 throw new ArgumentOutOfRangeException("No image file found.");
@@ -77,6 +77,24 @@ namespace Disney.Services
             var result = characters.Select(c => _mapper.Map<CharacterListItemDto>(c)).ToList();
 
             return result;
+        }
+
+        public async Task DeleteCharacter(int id)
+        {
+            var existingCharacter = await _context.Characters.SingleOrDefaultAsync(c => c.Id == id);
+
+            if (existingCharacter == null)
+                throw new ObjectNotFoundException("Character not found.");
+
+            _context.Characters.Remove(existingCharacter);
+            await _context.SaveChangesAsync();
+
+            File.Delete(existingCharacter.ImagePath);
+        }
+
+        public async Task<CharacterUpdatedDto> UpdateCharacter()
+        {
+            throw new NotImplementedException();
         }
     }
 }
