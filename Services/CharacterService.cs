@@ -118,5 +118,29 @@ namespace Disney.Services
             var result = _mapper.Map<CharacterUpdateResponseDto>(existingCharacter);
             return result;
         }
+
+        public async Task<CharacterListItemDto> GetByName(string name)
+        {
+            var existingCharacter = await _context.Characters.FirstOrDefaultAsync(c => c.Name.ToLower().Equals(name.ToLower()));
+
+            if (existingCharacter == null)
+                return null;
+
+            var result = _mapper.Map<CharacterListItemDto>(existingCharacter);
+            return result;
+        }
+
+        public async Task<IList<CharacterListItemDto>> GetCharactersByAge(int age)
+        {
+            var existingCharacters = await _context.Characters.Where(c => c.Age == age).ToListAsync();
+
+            if (existingCharacters == null)
+                return null;
+
+            var result = existingCharacters.Select(c => _mapper.Map<CharacterListItemDto>(c)).ToList();
+            return result;
+        }
+
+        // public async Task
     }
 }

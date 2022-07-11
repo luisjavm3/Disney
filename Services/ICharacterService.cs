@@ -9,5 +9,7 @@ namespace Disney.Services
         Task<IList<CharacterListItemDto>> GetAll();
         Task DeleteCharacter(int id);
         Task<CharacterUpdateResponseDto> UpdateCharacter(CharacterUpdateDto characterUpdate, IFormFile imageFile, int id);
+        Task<CharacterListItemDto> GetByName(string name);
+        Task<IList<CharacterListItemDto>> GetCharactersByAge(int age);
     }
 }

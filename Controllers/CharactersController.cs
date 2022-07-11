@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Disney.DTOs.Character;
 using Disney.Exceptions;
@@ -25,8 +26,20 @@ namespace Disney.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IList<CharacterListItemDto>>> GetAllCharacters()
+        public async Task<ActionResult<IList<CharacterListItemDto>>> GetAllCharacters(string name = "", int age = 0, int movies = 0)
         {
+            if (!name.Equals(string.Empty))
+            {
+                var existingCharacter = await _characterService.GetByName(name);
+                return existingCharacter == null ? new CharacterListItemDto[0] : new[] { existingCharacter };
+            }
+
+            if (age != 0)
+                return Ok(await _characterService.GetCharactersByAge(age));
+
+            // if(movies!=0)
+
+
             return Ok(await _characterService.GetAll());
         }
 
