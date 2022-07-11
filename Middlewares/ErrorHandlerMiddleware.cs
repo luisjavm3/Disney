@@ -26,18 +26,13 @@ namespace Disney.Middlewares
                 switch (ex)
                 {
                     case AppException e:
-                        response.StatusCode = StatusCodes.Status400BadRequest;
-                        break;
-
-                    case ArgumentOutOfRangeException e:
-                        response.StatusCode = StatusCodes.Status400BadRequest;
-                        break;
-
-                    case ArgumentNullException e:
+                    case ArgumentOutOfRangeException er:
+                    case ArgumentNullException err:
                         response.StatusCode = StatusCodes.Status400BadRequest;
                         break;
 
                     case KeyNotFoundException e:
+                    case ObjectNotFoundException er:
                         response.StatusCode = StatusCodes.Status404NotFound;
                         break;
 

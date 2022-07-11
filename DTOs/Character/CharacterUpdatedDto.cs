@@ -2,14 +2,16 @@ using System.Text.Json.Serialization;
 
 namespace Disney.DTOs.Character
 {
-    public class CharacterListItemDto
+    public class CharacterUpdatedDto
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
-
         [JsonIgnore]
         public string ImagePath { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public int Weight { get; set; }
+        public string History { get; set; }
         public string Image
         {
             get
@@ -18,6 +20,5 @@ namespace Disney.DTOs.Character
                 return Convert.ToBase64String(stream);
             }
         }
-
     }
 }

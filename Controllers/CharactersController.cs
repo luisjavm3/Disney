@@ -18,7 +18,7 @@ namespace Disney.Controllers
         [HttpPost]
         public async Task<ActionResult<CharacterResponseDto>> AddCharacter([FromForm] CharacterCreateDto characterCreate, IFormFile image)
         {
-            CharacterResponseDto response = await _characterService.AddOne(characterCreate, image);
+            CharacterResponseDto response = await _characterService.AddCharacter(characterCreate, image);
             return Ok(response);
         }
 
@@ -26,6 +26,13 @@ namespace Disney.Controllers
         public async Task<ActionResult<IList<CharacterListItemDto>>> GetAllCharacters()
         {
             return Ok(await _characterService.GetAll());
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCharacter(int id)
+        {
+            await _characterService.DeleteCharacter(id);
+            return NoContent();
         }
     }
 }
