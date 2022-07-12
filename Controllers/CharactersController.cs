@@ -26,7 +26,7 @@ namespace Disney.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CharacterResponseDto>> GetAllCharacters(int id)
+        public async Task<ActionResult<CharacterGetDto>> GetById(int id)
         {
             return Ok(await _characterService.GetById(id));
         }
