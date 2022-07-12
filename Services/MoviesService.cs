@@ -40,9 +40,7 @@ namespace Disney.Services
                     await _context.MovieSeries.AddAsync(movie);
                     await _context.SaveChangesAsync();
 
-                    imagePath = $"{_imagePaths.MovieSeries}/{movie.Id}{movieCreate.Image.FileName}";
-                    Console.WriteLine($"---→ ImagePath: {imagePath}");
-
+                    imagePath = $"{_imagePaths.MovieSeries}/{movie.Id}{Path.GetExtension(movieCreate.Image.FileName)}";
 
                     using (var stream = System.IO.File.Create(imagePath))
                     {
