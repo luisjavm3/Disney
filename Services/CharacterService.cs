@@ -69,7 +69,7 @@ namespace Disney.Services
 
                     await transaction.CommitAsync();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     await transaction.RollbackAsync();
 
