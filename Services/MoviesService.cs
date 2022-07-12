@@ -4,6 +4,7 @@ using Disney.DTOs.Movies;
 using Disney.Entities;
 using Disney.Exceptions;
 using Disney.Settings;
+using Microsoft.EntityFrameworkCore;
 
 namespace Disney.Services
 {
@@ -62,6 +63,21 @@ namespace Disney.Services
                     throw new AppException("Something went wrong when adding new movie.");
                 }
             }
+        }
+
+        public async Task DeleteMovie(int id)
+        {
+            var existingMovie = await _context.MovieSeries.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (existingMovie == null)
+                throw new ObjectNotFoundException("Movie not found.");
+
+            var imagePath = existingMovie.ImagePath;
+
+            _context.MovieSeries.Remove(existingMovie);
+            await _context.SaveChangesAsync();
+
+            File.Delete(imagePath);
         }
     }
 }

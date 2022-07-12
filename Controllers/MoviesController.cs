@@ -21,5 +21,18 @@ namespace Disney.Controllers
             await _moviesService.AddMovie(movieCreate);
             return Ok();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteMovie(int id)
+        {
+            await _moviesService.DeleteMovie(id);
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> AllMovies()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
