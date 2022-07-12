@@ -79,5 +79,13 @@ namespace Disney.Services
 
             File.Delete(imagePath);
         }
+
+        public async Task<IList<MovieListItem>> GetAllMovies()
+        {
+            var existingMovies = await _context.MovieSeries.ToListAsync();
+            var result = existingMovies.Select(m => _mapper.Map<MovieListItem>(m)).ToList();
+            return result;
+        }
+
     }
 }
