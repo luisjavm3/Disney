@@ -34,5 +34,12 @@ namespace Disney.Controllers
         {
             return Ok(await _moviesService.GetAllMovies());
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateMovie([FromForm] MovieUpdateDto movieUpdate, int id)
+        {
+            await _moviesService.UpdateMovie(movieUpdate, id);
+            return Ok();
+        }
     }
 }

@@ -87,5 +87,27 @@ namespace Disney.Services
             return result;
         }
 
+        public async Task UpdateMovie(MovieUpdateDto movieUpdate, int id)
+        {
+            var existingMovie = await _context.MovieSeries.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (existingMovie == null)
+                throw new ObjectNotFoundException("Movie not found.");
+
+            existingMovie.Title = movieUpdate.Title;
+            existingMovie.Released = movieUpdate.Released;
+            existingMovie.Rate = movieUpdate.Rate;
+
+            var imagePath = existingMovie.ImagePath;
+
+            using (var stream = System.IO.File.Create(imagePath))
+            {
+                File.Delete(imagePath);
+                await movieUpdate.Image.CopyToAsync(stream);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

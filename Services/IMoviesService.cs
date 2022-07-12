@@ -7,5 +7,6 @@ namespace Disney.Services
         Task AddMovie(MovieCreateDto movieCreate);
         Task DeleteMovie(int id);
         Task<IList<MovieListItem>> GetAllMovies();
+        Task UpdateMovie(MovieUpdateDto movieUpdate, int id);
     }
 }
