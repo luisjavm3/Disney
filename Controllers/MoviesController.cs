@@ -30,9 +30,9 @@ namespace Disney.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> AllMovies()
+        public async Task<ActionResult<IList<MovieListItem>>> AllMovies()
         {
-            throw new NotImplementedException();
+            return Ok(await _moviesService.GetAllMovies());
         }
     }
 }

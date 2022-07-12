@@ -1,5 +1,6 @@
 using AutoMapper;
 using Disney.DTOs.Character;
+using Disney.DTOs.Movies;
 using Disney.Entities;
 
 namespace Disney
@@ -8,6 +9,7 @@ namespace Disney
     {
         public AutoMapperProfile()
         {
+            // Characters
             CreateMap<Character, CharacterResponseDto>();
             CreateMap<CharacterCreateDto, Character>();
             CreateMap<Character, CharacterListItemDto>();
@@ -18,6 +20,10 @@ namespace Disney
             CreateMap<Character, CharacterGetDto>()
                 .ForMember(x => x.Image, opt => opt.MapFrom(src => GetImage(src.ImagePath)))
                 .ForMember(x => x.Movies, opt => opt.MapFrom(src => src.MovieSeries));
+
+            // Movies
+            CreateMap<MovieSerie, MovieListItem>()
+                .ForMember(x => x.Image, opt => opt.MapFrom(src => GetImage(src.ImagePath)));
         }
 
         private string GetImage(string path)
