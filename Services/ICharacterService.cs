@@ -12,5 +12,6 @@ namespace Disney.Services
         Task<CharacterListItemDto> GetByName(string name);
         Task<IList<CharacterListItemDto>> GetCharactersByAge(int age);
         Task<IList<CharacterListItemDto>> GetCharactersFromMovie(int movieId);
+        Task<CharacterResponseDto> GetById(int id);
     }
 }

@@ -26,6 +26,16 @@ namespace Disney.Services
             _imagePaths = _configuration.GetSection(nameof(ImagePaths)).Get<ImagePaths>();
         }
 
+        public async Task<CharacterResponseDto> GetById(int id)
+        {
+            var existingCharacter = await _context.Characters.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (existingCharacter == null)
+                return null;
+
+            return _mapper.Map<CharacterResponseDto>(existingCharacter);
+        }
+
         public async Task<CharacterResponseDto> AddCharacter(CharacterCreateDto charaterCreate, IFormFile imageFile)
         {
             if (imageFile.Length <= 0)

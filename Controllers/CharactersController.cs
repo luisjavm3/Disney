@@ -25,6 +25,12 @@ namespace Disney.Controllers
             return Ok(response);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CharacterResponseDto>> GetAllCharacters(int id)
+        {
+            return Ok(await _characterService.GetById(id));
+        }
+
         [HttpGet]
         public async Task<ActionResult<IList<CharacterListItemDto>>> GetAllCharacters(string name = "", int age = 0, int movies = 0)
         {
