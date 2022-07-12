@@ -33,6 +33,7 @@ namespace Disney.DTOs.Movies
         }
 
         [Required]
+        [Range(1, 5)]
         public int Rate { get; set; }
     }
 }
