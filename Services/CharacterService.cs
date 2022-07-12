@@ -141,6 +141,20 @@ namespace Disney.Services
             return result;
         }
 
-        // public async Task
+        public async Task<IList<CharacterListItemDto>> GetCharactersFromMovie(int movieId)
+        {
+            var existingMovie = await _context.MovieSeries
+                                .Include(m => m.Characters)
+                                .FirstOrDefaultAsync(m => m.Id == movieId);
+
+            if (existingMovie == null)
+                return new CharacterListItemDto[0];
+
+            var result = existingMovie.Characters
+                            .Select(c => _mapper.Map<CharacterListItemDto>(c))
+                            .ToList();
+
+            return result;
+        }
     }
 }

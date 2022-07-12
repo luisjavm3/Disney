@@ -37,8 +37,8 @@ namespace Disney.Controllers
             if (age != 0)
                 return Ok(await _characterService.GetCharactersByAge(age));
 
-            // if(movies!=0)
-
+            if (movies != 0)
+                return Ok(await _characterService.GetCharactersFromMovie(movies));
 
             return Ok(await _characterService.GetAll());
         }
