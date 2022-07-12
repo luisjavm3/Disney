@@ -100,9 +100,10 @@ namespace Disney.Services
 
             var imagePath = existingMovie.ImagePath;
 
+            File.Delete(imagePath);
+
             using (var stream = System.IO.File.Create(imagePath))
             {
-                File.Delete(imagePath);
                 await movieUpdate.Image.CopyToAsync(stream);
             }
 
