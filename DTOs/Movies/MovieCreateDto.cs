@@ -11,6 +11,9 @@ namespace Disney.DTOs.Movies
         public string Title { get; set; }
 
         [Required]
+        public int Released { get; set; }
+
+        [Required]
         public int Rate { get; set; }
     }
 }

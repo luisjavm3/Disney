@@ -12,7 +12,7 @@ namespace Disney.Entities
         public string Title { get; set; }
 
         [Required]
-        public DateTime CreatedAt { get; set; }
+        public int Released { get; set; }
 
         [Required]
         public int Rate { get; set; }

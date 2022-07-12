@@ -27,7 +27,7 @@ namespace Disney.Services
             var movie = new MovieSerie
             {
                 Title = movieCreate.Title,
-                CreatedAt = DateTime.UtcNow,
+                Released = movieCreate.Released,
                 Rate = movieCreate.Rate
             };
 
