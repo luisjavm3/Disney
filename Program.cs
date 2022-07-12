@@ -12,6 +12,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ICharacterService, CharacterService>();
+builder.Services.AddScoped<IMoviesService, MoviesService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

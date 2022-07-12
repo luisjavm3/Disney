@@ -6,7 +6,6 @@ namespace Disney.Entities
     {
         public int Id { get; set; }
 
-        [Required]
         public string ImagePath { get; set; }
 
         [Required]
