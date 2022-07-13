@@ -1,5 +1,6 @@
 using AutoMapper;
 using Disney.DTOs.Character;
+using Disney.DTOs.Genre;
 using Disney.DTOs.Movies;
 using Disney.Entities;
 
@@ -27,6 +28,9 @@ namespace Disney
 
             CreateMap<MovieSerie, MovieDetailsDto>()
                 .ForMember(x => x.Characters, opt => opt.Ignore());
+
+            // Genres
+            CreateMap<GenreCreateDto, Genre>();
         }
 
         private string GetImage(string path)
