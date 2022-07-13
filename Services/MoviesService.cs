@@ -128,5 +128,23 @@ namespace Disney.Services
             return result;
         }
 
+        public async Task AddCharacterToMovie(int movieId, int characterId)
+        {
+            var existingMovie = await _context.MovieSeries
+                                    .Include(m => m.Characters)
+                                    .FirstOrDefaultAsync(m => m.Id == movieId);
+
+            if (existingMovie == null)
+                throw new ObjectNotFoundException("Movie not found.");
+
+            var existingCharacter = await _context.Characters.FirstOrDefaultAsync(c => c.Id == characterId);
+
+            if (existingCharacter == null)
+                throw new ObjectNotFoundException("Character not found.");
+
+            existingMovie.Characters.Add(existingCharacter);
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

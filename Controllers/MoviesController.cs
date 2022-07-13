@@ -51,7 +51,8 @@ namespace Disney.Controllers
         [HttpPut("{movieId}/characters/{characterId}")]
         public async Task<ActionResult> AddCharacterToMovie(int movieId, int characterId)
         {
-            throw new NotImplementedException();
+            await _moviesService.AddCharacterToMovie(movieId, characterId);
+            return Ok();
         }
     }
 }
