@@ -41,5 +41,17 @@ namespace Disney.Controllers
             await _moviesService.UpdateMovie(movieUpdate, id);
             return Ok();
         }
+
+        [HttpGet("{id}/details")]
+        public async Task<ActionResult<MovieDetailsDto>> GetMovieDetails(int id)
+        {
+            return Ok(await _moviesService.GetMovieDetails(id));
+        }
+
+        [HttpPut("{movieId}/characters/{characterId}")]
+        public async Task<ActionResult> AddCharacterToMovie(int movieId, int characterId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -24,6 +24,9 @@ namespace Disney
             // Movies
             CreateMap<MovieSerie, MovieListItem>()
                 .ForMember(x => x.Image, opt => opt.MapFrom(src => GetImage(src.ImagePath)));
+
+            CreateMap<MovieSerie, MovieDetailsDto>()
+                .ForMember(x => x.Characters, opt => opt.Ignore());
         }
 
         private string GetImage(string path)

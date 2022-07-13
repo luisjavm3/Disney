@@ -1,5 +1,6 @@
 using AutoMapper;
 using Disney.Data;
+using Disney.DTOs.Character;
 using Disney.DTOs.Movies;
 using Disney.Entities;
 using Disney.Exceptions;
@@ -108,6 +109,23 @@ namespace Disney.Services
             }
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<MovieDetailsDto> GetMovieDetails(int id)
+        {
+            var existingMovie = await _context.MovieSeries
+                                    .Include(m => m.Characters)
+                                    .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (existingMovie == null)
+                throw new ObjectNotFoundException("Movie not found.");
+
+            var result = _mapper.Map<MovieDetailsDto>(existingMovie);
+            result.Characters = existingMovie.Characters
+                                    .Select(c => _mapper.Map<CharacterListItemDto>(c))
+                                    .ToList();
+
+            return result;
         }
 
     }
