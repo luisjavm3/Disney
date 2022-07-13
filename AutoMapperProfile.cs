@@ -30,7 +30,8 @@ namespace Disney
                 .ForMember(x => x.Characters, opt => opt.Ignore());
 
             // Genres
-            CreateMap<GenreCreateDto, Genre>();
+            CreateMap<GenreCreateDto, Genre>()
+                .ForSourceMember(x => x.Image, opt => opt.DoNotValidate());
         }
 
         private string GetImage(string path)

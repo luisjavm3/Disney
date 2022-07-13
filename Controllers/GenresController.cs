@@ -16,7 +16,7 @@ namespace Disney.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddGenre(GenreCreateDto genreCreate)
+        public async Task<ActionResult> AddGenre([FromForm] GenreCreateDto genreCreate)
         {
             await _genresService.AddGenre(genreCreate);
             return Ok();
