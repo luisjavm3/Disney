@@ -11,5 +11,6 @@ namespace Disney.Services
         Task<MovieDetailsDto> GetMovieDetails(int id);
         Task AddCharacterToMovie(int movieId, int characterId);
         Task<IList<MovieListItem>> GetMoviesByTitle(string title);
+        Task<IList<MovieListItem>> GetMoviesByGenre(int genreId);
     }
 }

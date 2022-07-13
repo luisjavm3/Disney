@@ -35,6 +35,8 @@ namespace Disney.Controllers
             if (!name.Equals(string.Empty))
                 return Ok(await _moviesService.GetMoviesByTitle(name));
 
+            if (genre != 0)
+                return Ok(await _moviesService.GetMoviesByGenre(genre));
 
 
             return Ok(await _moviesService.GetAllMovies());

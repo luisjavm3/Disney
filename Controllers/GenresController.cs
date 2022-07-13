@@ -27,5 +27,12 @@ namespace Disney.Controllers
         {
             return Ok(await _genresService.GetAllGenres());
         }
+
+        [HttpPut("{genreId}/movies/{movieId}")]
+        public async Task<ActionResult> AddMovieToGenre(int genreId, int movieId)
+        {
+            await _genresService.AddMovieToGenre(genreId, movieId);
+            return Ok();
+        }
     }
 }

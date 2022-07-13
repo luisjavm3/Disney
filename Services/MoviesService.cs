@@ -162,5 +162,28 @@ namespace Disney.Services
 
             return result;
         }
+
+        public async Task<IList<MovieListItem>> GetMoviesByGenre(int genreId)
+        {
+            var existingGenre = await _context.Genres
+                                .Include(g => g.MovieSeries)
+                                .FirstOrDefaultAsync(g => g.Id == genreId);
+
+            if (existingGenre == null)
+                throw new ObjectNotFoundException("Genre not found.");
+
+            var result = existingGenre.MovieSeries
+                            .Select(m => _mapper.Map<MovieListItem>(m))
+                            .ToList();
+
+            return result;
+        }
+
+        public async Task<IList<MovieListItem>> GetMoviesByReleased(string order)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

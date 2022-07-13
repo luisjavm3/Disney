@@ -6,5 +6,6 @@ namespace Disney.Services
     {
         Task AddGenre(GenreCreateDto genreCreate);
         Task<IList<GenreGetDto>> GetAllGenres();
+        Task AddMovieToGenre(int genreId, int movieId);
     }
 }

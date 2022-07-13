@@ -72,6 +72,26 @@ namespace Disney.Services
             var result = existingGenres.Select(g => _mapper.Map<GenreGetDto>(g)).ToList();
             return result;
         }
+
+        public async Task AddMovieToGenre(int genreId, int movieId)
+        {
+            var existingGenre = await _context.Genres.FirstOrDefaultAsync(g => g.Id == genreId);
+
+            if (existingGenre == null)
+                throw new ObjectNotFoundException("Genre not found");
+
+            var existingMovie = await _context.MovieSeries.FirstOrDefaultAsync(m => m.Id == movieId);
+
+            if (existingMovie == null)
+                throw new ObjectNotFoundException("Movie not found");
+
+            if (existingGenre.MovieSeries == null)
+                existingGenre.MovieSeries = new List<MovieSerie>();
+
+            existingGenre.MovieSeries.Add(existingMovie);
+
+            await _context.SaveChangesAsync();
+        }
     }
 
 
