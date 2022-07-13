@@ -30,8 +30,13 @@ namespace Disney.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IList<MovieListItem>>> AllMovies()
+        public async Task<ActionResult<IList<MovieListItem>>> AllMovies(string name = "", int genre = 0, string order = "")
         {
+            if (!name.Equals(string.Empty))
+                return Ok(await _moviesService.GetMoviesByTitle(name));
+
+
+
             return Ok(await _moviesService.GetAllMovies());
         }
 

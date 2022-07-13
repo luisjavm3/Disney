@@ -146,5 +146,21 @@ namespace Disney.Services
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IList<MovieListItem>> GetMoviesByTitle(string title)
+        {
+            var existingMovies = await _context.MovieSeries
+                                    .Where(m => m.Title.ToLower().Equals(title.ToLower()))
+                                    .ToListAsync();
+
+            if (existingMovies.Count == 0)
+                return new MovieListItem[0];
+
+            var result = existingMovies
+                            .Select(m => _mapper.Map<MovieListItem>(m))
+                            .ToList();
+
+            return result;
+        }
     }
 }
