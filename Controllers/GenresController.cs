@@ -21,5 +21,11 @@ namespace Disney.Controllers
             await _genresService.AddGenre(genreCreate);
             return Ok();
         }
+
+        [HttpGet]
+        public async Task<ActionResult<List<GenreGetDto>>> GetAllGenres()
+        {
+            return Ok(await _genresService.GetAllGenres());
+        }
     }
 }

@@ -32,6 +32,9 @@ namespace Disney
             // Genres
             CreateMap<GenreCreateDto, Genre>()
                 .ForSourceMember(x => x.Image, opt => opt.DoNotValidate());
+
+            CreateMap<Genre, GenreGetDto>();
+
         }
 
         private string GetImage(string path)

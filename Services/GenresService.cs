@@ -65,5 +65,14 @@ namespace Disney.Services
                 }
             }
         }
+
+        public async Task<IList<GenreGetDto>> GetAllGenres()
+        {
+            var existingGenres = await _context.Genres.ToListAsync();
+            var result = existingGenres.Select(g => _mapper.Map<GenreGetDto>(g)).ToList();
+            return result;
+        }
     }
+
+
 }

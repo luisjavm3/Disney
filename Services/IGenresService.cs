@@ -5,5 +5,6 @@ namespace Disney.Services
     public interface IGenresService
     {
         Task AddGenre(GenreCreateDto genreCreate);
+        Task<IList<GenreGetDto>> GetAllGenres();
     }
 }
