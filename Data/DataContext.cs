@@ -11,7 +11,7 @@ namespace Disney.Data
         public DbSet<Character> Characters { get; set; }
         public DbSet<MovieSerie> MovieSeries { get; set; }
         public DbSet<Genre> Genres { get; set; }
-        public DbSet<User> Usersw { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
