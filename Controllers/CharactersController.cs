@@ -3,10 +3,12 @@ using System.ComponentModel.DataAnnotations;
 using Disney.DTOs.Character;
 using Disney.Exceptions;
 using Disney.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Disney.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CharactersController : ControllerBase

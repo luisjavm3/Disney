@@ -1,9 +1,11 @@
 using Disney.DTOs.Genre;
 using Disney.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Disney.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class GenresController : ControllerBase

@@ -1,10 +1,12 @@
 using Disney.DTOs.Movies;
 using Disney.Model;
 using Disney.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Disney.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class MoviesController : ControllerBase
