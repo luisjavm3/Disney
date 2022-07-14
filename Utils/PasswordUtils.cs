@@ -10,5 +10,21 @@ namespace Disney.Utils
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
+
+        public static bool MatchHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var computedHast = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+
+                for (var i = 0; i < passwordHash.Length; i++)
+                {
+                    if (passwordHash[i] != computedHast[i])
+                        return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
