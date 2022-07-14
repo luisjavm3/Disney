@@ -1,4 +1,5 @@
 using Disney.DTOs.Movies;
+using Disney.Model;
 using Disney.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +31,7 @@ namespace Disney.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IList<MovieListItem>>> AllMovies(string name = "", int genre = 0, string order = "")
+        public async Task<ActionResult<IList<MovieListItem>>> AllMovies(string name = "", int genre = 0, Order order = Order.None)
         {
             if (!name.Equals(string.Empty))
                 return Ok(await _moviesService.GetMoviesByTitle(name));
@@ -38,6 +39,8 @@ namespace Disney.Controllers
             if (genre != 0)
                 return Ok(await _moviesService.GetMoviesByGenre(genre));
 
+            if (order != Order.None)
+                return Ok(await _moviesService.GetMoviesByReleased(order));
 
             return Ok(await _moviesService.GetAllMovies());
         }

@@ -7,5 +7,6 @@ namespace Disney.Model
     {
         ASC,
         DESC,
+        None
     }
 }

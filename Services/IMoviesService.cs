@@ -1,4 +1,5 @@
 using Disney.DTOs.Movies;
+using Disney.Model;
 
 namespace Disney.Services
 {
@@ -12,5 +13,6 @@ namespace Disney.Services
         Task AddCharacterToMovie(int movieId, int characterId);
         Task<IList<MovieListItem>> GetMoviesByTitle(string title);
         Task<IList<MovieListItem>> GetMoviesByGenre(int genreId);
+        Task<IList<MovieListItem>> GetMoviesByReleased(Order order);
     }
 }

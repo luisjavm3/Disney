@@ -4,6 +4,7 @@ using Disney.DTOs.Character;
 using Disney.DTOs.Movies;
 using Disney.Entities;
 using Disney.Exceptions;
+using Disney.Model;
 using Disney.Settings;
 using Microsoft.EntityFrameworkCore;
 
@@ -179,9 +180,29 @@ namespace Disney.Services
             return result;
         }
 
-        public async Task<IList<MovieListItem>> GetMoviesByReleased(string order)
+        public async Task<IList<MovieListItem>> GetMoviesByReleased(Order order)
         {
-            throw new NotImplementedException();
+            // List<MovieListItem> existingMovies = new List<MovieListItem>();
+            List<MovieSerie> existingMovies = null;
+
+            if (order == Order.DESC)
+            {
+                existingMovies = await _context.MovieSeries
+                                        .OrderByDescending(m => m.Released)
+                                        .ToListAsync();
+            }
+            else
+            {
+                existingMovies = await _context.MovieSeries
+                                        .OrderBy(m => m.Released)
+                                        .ToListAsync();
+            }
+
+            var result = existingMovies
+                            .Select(m => _mapper.Map<MovieListItem>(m))
+                            .ToList();
+
+            return result;
         }
 
 
