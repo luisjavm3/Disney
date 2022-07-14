@@ -5,6 +5,7 @@ namespace Disney.DTOs.User
     public class UserAuthDto
     {
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
