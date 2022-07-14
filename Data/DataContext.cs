@@ -11,11 +11,15 @@ namespace Disney.Data
         public DbSet<Character> Characters { get; set; }
         public DbSet<MovieSerie> MovieSeries { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<User> Usersw { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Character>()
                 .HasAlternateKey(r => r.Name);
+
+            modelBuilder.Entity<User>()
+                .HasAlternateKey(u => u.Email);
         }
     }
 }
