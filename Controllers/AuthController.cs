@@ -1,4 +1,5 @@
 using Disney.DTOs.User;
+using Disney.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Disney.Controllers
@@ -7,11 +8,18 @@ namespace Disney.Controllers
     [Route("[controller]")]
     public class AuthController : ControllerBase
     {
+        private readonly IAuthService _authService;
+
+        public AuthController(IAuthService authService)
+        {
+            _authService = authService;
+        }
 
         [HttpPost("Register")]
         public async Task<ActionResult> Register(UserAuthDto authDto)
         {
-            throw new NotImplementedException();
+            await _authService.Register(authDto);
+            return Ok();
         }
 
         [HttpPost("Login")]
